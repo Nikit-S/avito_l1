@@ -65,7 +65,13 @@ type Model struct {
 таких конвейеров но тогда нужно будет вешать замки
 */
 func (m *Model) decider(f interface{}) interface{} {
-	v := int(f.(float64))
+	var v int
+	if f.(float64) < 0 {
+		v = int(f.(float64) - 10)
+	} else {
+		v = int(f.(float64))
+	}
+
 	group := v / 10 * 10
 	fl := f.(float64)
 	_, ok := m.m[group]
@@ -82,7 +88,7 @@ func main() {
 		data: make([]interface{}, 0),
 		m:    make(map[int][]float64),
 	}
-	m.data = append(m.data, -25.4, -27.0, 13.0, 19.0, 15.5, 24.5, -21.0, 32.5, 1.0)
+	m.data = append(m.data, -25.4, -27.0, 13.0, 19.0, 15.5, 24.5, -21.0, 32.5, 1.0, -1.0, -9.1, 0.0)
 	m.f = m.decider
 	Convrun(&m)
 	fmt.Println(m.m)
