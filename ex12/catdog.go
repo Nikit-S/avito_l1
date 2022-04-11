@@ -56,14 +56,14 @@ func Convrun(conv Conv) {
 type Model struct {
 	data []interface{}
 	f    func(interface{}) interface{}
-	m    map[interface{}]bool
+	m    map[interface{}]struct{}
 }
 
 //такой же конвейер, соответствие условию множества происходит за счет использования мапы
 // которая может хранить только уникальные ключи
 func (m *Model) decider(str interface{}) interface{} {
 	_, ok := m.m[str]
-	m.m[str] = true
+	m.m[str] = struct{}{}
 	if ok {
 		return str
 	}
@@ -76,7 +76,7 @@ func main() {
 		data: make([]interface{}, 0),
 	}
 	m.f = m.decider
-	m.m = make(map[interface{}]bool)
+	m.m = make(map[interface{}]struct{})
 	m.data = append(m.data, words...)
 	Convrun(&m)
 	fmt.Print("Uniq: ")
