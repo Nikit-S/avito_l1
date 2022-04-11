@@ -5,6 +5,26 @@ import (
 	"strconv"
 )
 
+// битовые операции это боль!!!
+func main() {
+	var l int64
+	l = 9223372036854775800
+
+	var val int64
+	var pos int64
+
+	fmt.Println(strconv.FormatInt(l, 2))
+	fmt.Scan(&val)
+	fmt.Scan(&pos)
+	if val == 0 {
+		fmt.Println(strconv.FormatInt(l&(9223372036854775807-1<<pos), 2))
+	} else if val == 1 {
+		fmt.Println(strconv.FormatInt(l|1<<pos, 2))
+	}
+
+}
+
+/*
 func changebit(l, n, z int64) int64 {
 	if z != 1 && z != 0 {
 		return l
@@ -29,13 +49,4 @@ func changebit(l, n, z int64) int64 {
 	}
 	return l
 }
-
-// битовые операции это боль!!!
-func main() {
-	var l int64
-	l = 9223372036854775800
-
-	fmt.Println(strconv.FormatInt(l, 2))
-	l = changebit(l, 5, 0)
-	fmt.Println(strconv.FormatInt(l, 2))
-}
+*/

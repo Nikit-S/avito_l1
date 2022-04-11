@@ -52,6 +52,11 @@ func main() {
 		m.Set(1, "Hello")
 		wg.Done()
 	}(m, &wg)
+	//горутина записи
+	go func(m *ConMap, wg *sync.WaitGroup) {
+		m.Set(1, "World")
+		wg.Done()
+	}(m, &wg)
 	time.Sleep(1 * time.Second)
 
 	//горутина чтения

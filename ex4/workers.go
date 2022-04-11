@@ -82,9 +82,8 @@ func main() {
 		go work(&jo, n)
 		n--
 	}
-	tasks := make([]interface{}, 0)
+	tasks := [...]interface{}{"poopin'", "kweelin'", "yahoin'", "selebraitin'", "snifin' around", "smilin'"}
 	// тут без комментариев
-	tasks = append(tasks, "poopin'", "kweelin'", "yahoin'", "selebraitin'", "snifin' around", "smilin'")
 	for {
 		select {
 		//ситуация — всё кроме момента получеия данных  в канал с сигналами
