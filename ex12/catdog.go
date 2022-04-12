@@ -73,7 +73,7 @@ func (m *Model) decider(str interface{}) interface{} {
 func main() {
 	//t := []float32{-25.4, -27.0, 13.0, 19.0, 15.5, 24.5, -21.0, 32.5}
 	m := Model{
-		data: make([]interface{}, 0),
+		data: []interface{}{},
 	}
 	m.f = m.decider
 	m.m = make(map[interface{}]struct{})

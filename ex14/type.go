@@ -13,7 +13,7 @@ func main() {
 	var wg sync.WaitGroup
 	var mut sync.Cond
 	var mt MyType
-	arr := make([]interface{}, 0)
+	arr := []interface{}{}
 	arr = append(arr, 1, true, "hello", wg, mut, mt)
 
 	//способ один через Тип под копотом у фмт

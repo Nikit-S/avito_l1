@@ -17,8 +17,20 @@ func main() {
 	fmt.Scan(&val)
 	fmt.Scan(&pos)
 	if val == 0 {
+		//111111
+		//-
+		//000010
+		//=
+		//111101
+		//AND
+		//110111
+		//110101
 		fmt.Println(strconv.FormatInt(l&(9223372036854775807-1<<pos), 2))
 	} else if val == 1 {
+		//0000100
+		//OR
+		//1011011
+		//1011111
 		fmt.Println(strconv.FormatInt(l|1<<pos, 2))
 	}
 

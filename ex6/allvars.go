@@ -69,8 +69,8 @@ func main() {
 	go t.quitsig(sigs, &wg, "SigChan")
 
 	//горутина с завершением по закртыию канала
-	cch := make(chan bool, 1)
-	go func(ch chan bool) {
+	cch := make(chan struct{})
+	go func(ch chan struct{}) {
 		wg.Add(1)
 		fmt.Println("chan closing wait")
 		<-ch

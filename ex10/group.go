@@ -40,14 +40,14 @@ func (model *Model) Puller(ch chan interface{}, wg *sync.WaitGroup) {
 
 func Convrun(conv Conv) {
 	fmt.Println("Ignite")
-	var wg sync.WaitGroup
+	wg := new(sync.WaitGroup)
 	c1 := make(chan interface{})
 	c2 := make(chan interface{})
 	wg.Add(3)
 	fmt.Println("strting goroutines")
-	go conv.Pusher(c1, &wg)
-	go conv.Worker(c1, c2, &wg)
-	go conv.Puller(c2, &wg)
+	go conv.Pusher(c1, wg)
+	go conv.Worker(c1, c2, wg)
+	go conv.Puller(c2, wg)
 	wg.Wait()
 }
 
@@ -76,7 +76,7 @@ func (m *Model) decider(f interface{}) interface{} {
 	fl := f.(float64)
 	_, ok := m.m[group]
 	if !ok {
-		m.m[group] = make([]float64, 0)
+		m.m[group] = []float64{}
 	}
 	m.m[group] = append(m.m[group], fl)
 	return fl
@@ -85,7 +85,7 @@ func (m *Model) decider(f interface{}) interface{} {
 func main() {
 	//t := []float32{-25.4, -27.0, 13.0, 19.0, 15.5, 24.5, -21.0, 32.5}
 	m := Model{
-		data: make([]interface{}, 0),
+		data: []interface{}{},
 		m:    make(map[int][]float64),
 	}
 	m.data = append(m.data, -25.4, -27.0, 13.0, 19.0, 15.5, 24.5, -21.0, 32.5, 1.0, -1.0, -9.1, 0.0)

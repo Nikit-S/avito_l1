@@ -18,7 +18,7 @@ type JobOffer struct {
 	//группа ожидания
 	sync.WaitGroup
 	//канал ожидания выхода
-	quit chan bool
+	quit chan struct{}
 }
 
 //функция инициализации переменных
@@ -34,7 +34,7 @@ func initwork(jo *JobOffer, n *int) bool {
 
 	//создание каналов
 	jo.mch = make(chan interface{})
-	jo.quit = make(chan bool, 1)
+	jo.quit = make(chan struct{})
 	return true
 }
 

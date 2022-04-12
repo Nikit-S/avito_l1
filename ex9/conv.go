@@ -60,10 +60,12 @@ type Model struct {
 	f    func(interface{}) interface{}
 }
 
+//to do chan 0
+
 func main() {
 	//t := []float32{-25.4, -27.0, 13.0, 19.0, 15.5, 24.5, -21.0, 32.5}
 	m := Model{
-		data: make([]interface{}, 0),
+		data: []interface{}{},
 		f: func(i interface{}) interface{} {
 			return i.(int) * 2
 		},

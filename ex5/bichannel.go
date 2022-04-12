@@ -9,7 +9,7 @@ import (
 )
 
 //писатьель — функция для записи в канал
-func writer(mch chan interface{}, quit chan bool, wg *sync.WaitGroup) {
+func writer(mch chan interface{}, quit chan struct{}, wg *sync.WaitGroup) {
 	wg.Add(1)
 	for {
 		time.Sleep(50 * time.Millisecond)
@@ -28,7 +28,7 @@ func writer(mch chan interface{}, quit chan bool, wg *sync.WaitGroup) {
 }
 
 //читатель — функция для чтения из канала
-func reader(mch chan interface{}, quit chan bool, wg *sync.WaitGroup) {
+func reader(mch chan interface{}, quit chan struct{}, wg *sync.WaitGroup) {
 	wg.Add(1)
 	for {
 		//задержка для корректной работы терминала
@@ -46,18 +46,18 @@ func reader(mch chan interface{}, quit chan bool, wg *sync.WaitGroup) {
 
 func main() {
 	var n int
-	var wg sync.WaitGroup
+	wg := new(sync.WaitGroup)
 	fmt.Println("How long do I suppose to wait?")
 	fmt.Scan(&n)
 
 	if n <= 0 {
 		return
 	}
-	mch := make(chan interface{}, 1)
-	quit := make(chan bool, 1)
+	mch := make(chan interface{})
+	quit := make(chan struct{})
 
-	go writer(mch, quit, &wg)
-	go reader(mch, quit, &wg)
+	go writer(mch, quit, wg)
+	go reader(mch, quit, wg)
 
 	log.Println("waitin'")
 	time.Sleep(time.Duration(n) * time.Second)

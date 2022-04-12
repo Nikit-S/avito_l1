@@ -7,14 +7,14 @@ import (
 
 type ConMap struct {
 	sync.RWMutex
-	m map[rune]bool
+	m map[rune]struct{}
 }
 
 // весь вывод в программе нужен для наблюдения за очередностью
 // все слипы в программе нужны для исксутвенной очередности запуска горутин
 
 //метод получения по ключу
-func (m *ConMap) Get(key rune) (bool, bool) {
+func (m *ConMap) Get(key rune) (struct{}, bool) {
 	//блокировка чтения
 	m.RLock()
 	v, ok := m.m[key]
@@ -23,7 +23,7 @@ func (m *ConMap) Get(key rune) (bool, bool) {
 	return v, ok
 }
 
-func (m *ConMap) Set(key rune, value bool) {
+func (m *ConMap) Set(key rune, value struct{}) {
 	//блокировка чтения И записи
 	m.Lock()
 	m.m[key] = value
@@ -35,7 +35,7 @@ func main() {
 
 	word_source := []string{"lybjrEpTleTjYGcCjqzj", "nzeUAFoXWbnBLgcayFQO", "abcDeFghijklmnOpqrstuvwxyz"}
 	for _, word := range word_source {
-		m := &ConMap{m: make(map[rune]bool)}
+		m := &ConMap{m: make(map[rune]struct{})}
 
 		//бежит слева направо
 		var wg sync.WaitGroup
@@ -51,7 +51,7 @@ func main() {
 					if e > 'A' && e < 'Z' {
 						e = e - 'A' + 'a'
 					}
-					m.Set(e, true)
+					m.Set(e, struct{}{})
 				}
 			}
 			wg.Done()
@@ -69,7 +69,7 @@ func main() {
 					if e > 'A' && e < 'Z' {
 						e = e - 'A' + 'a'
 					}
-					m.Set(e, true)
+					m.Set(e, struct{}{})
 				}
 				i--
 			}
