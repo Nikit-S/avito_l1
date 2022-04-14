@@ -31,3 +31,19 @@ func main() {
 	fmt.Println(reflect.TypeOf(arr[3]) == reflect.TypeOf(arr[4]))
 	fmt.Println(reflect.TypeOf(arr[3]) == reflect.TypeOf(arr[3]))
 }
+
+/*
+switch v := a.(type) {
+// v это тип переменной a
+case int:
+   fmt.Print("через switch int '", v, "'\n")
+case bool:
+   fmt.Print("через switch bool '", v, "'\n")
+case string:
+   fmt.Print("через switch string '", v, "'\n")
+case chan struct{}:
+   fmt.Print("через switch chan '", v, "'\n")
+default:
+   fmt.Print("через switch unknown")
+}
+*/

@@ -41,7 +41,8 @@ func quicksort(a []int) []int {
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
-	slice := []int{13, -814, 154, 46, -481, 192, 535, -695, -711, -386, -243, 206, -447, 931, 921, -69, -523, 312, 227, 395}
+	//slice := []int{13, -814, 154, 46, -481, 192, 535, -695, -711, -386, -243, 206, -447, 931, 921, -69, -523, 312, 227, 395}
+	slice := []int{'A', 'C', 'D', 'k', 'a'}
 	//slice := []int{4, 2, 7, 9, 8, -1, -2}
 	fmt.Println("\n--- Unsorted --- \n\n", slice)
 	quicksort(slice)

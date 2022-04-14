@@ -33,6 +33,7 @@ func (t sec) quitsig(quit chan os.Signal, wg *sync.WaitGroup, str string) {
 	wg.Done()
 }
 
+// еще есть переменная переданная по указателю
 func main() {
 	var wg sync.WaitGroup
 	var t sec
