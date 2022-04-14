@@ -77,7 +77,7 @@ func main() {
 		fmt.Println("chan closing success")
 		wg.Done()
 	}(cch)
-	go func(ch chan bool) {
+	go func(ch chan struct{}) {
 		wg.Add(1)
 		time.Sleep(2 * time.Second)
 		fmt.Println("chan closing command")
